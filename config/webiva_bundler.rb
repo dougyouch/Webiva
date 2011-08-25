@@ -11,7 +11,6 @@ module Webiva
 
     def self.gemfiles
       @gemfiles ||= begin
-        ["#{self.base_dir}/config/Gemfile"] +
         Dir.glob("#{self.base_dir}/vendor/modules/[a-z]*").collect do |dir|
           file = "#{dir}/Gemfile"
           File.exists?(file) ? file : nil
@@ -21,9 +20,10 @@ module Webiva
 
     def self.create_gemfile
       File.open(self.tmp_gemfile, "w") do |f|
-        self.gemfiles.each do |file|
-          f.write File.read(file)
+        data = File.read("#{self.base_dir}/config/Gemfile").tap do |str|
+          str.sub! '# [MODULE GEMFILES]', "# [MODULE GEMFILES]\n" + self.gemfiles.collect { |g| File.read g }.join
         end
+        f.write data
       end
     end
     

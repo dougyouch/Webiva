@@ -28,6 +28,10 @@ gem 'image_size'
 gem 'eventmachine'
 gem 'starling'
 
+# do not erase the following line
+# [MODULE GEMFILES]
+
+
 group :test, :spec, :cucumber, :selenium do
   gem 'rspec-rails'
   gem 'cucumber-rails'
