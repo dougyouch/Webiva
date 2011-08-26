@@ -468,7 +468,7 @@ FEATURE
 
   def view_account_feature(data)
     webiva_feature(:view_account,data) do |c|
-      c.expansion_tag('user') { |t| t.locals.user = data[:user] }
+      c.expansion_tag('user') { |t| t.locals.user = data[:user] if data[:user] && data[:user].id }
       c.user_details_tags('user') { |t| t.locals.user }
     end
   end
