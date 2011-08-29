@@ -46,7 +46,7 @@ class ContentModelType < DomainModel
      @@subclasses = []
   end
   
-  def self.human_attribute_name(attribute)
+  def self.human_attribute_name(attribute, options={})
     attribute.to_s.humanize
   end
 
