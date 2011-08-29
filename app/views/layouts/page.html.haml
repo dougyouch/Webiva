@@ -1,4 +1,7 @@
-- unless @partial_page || @output.partial
+- if @partial_page || @output.partial
+  != render_output(@page,@output) do
+    = yield
+- else
   != @output.doctype ||  '<!DOCTYPE html>'
   = tag 'html', {:xmlns => "http://www.w3.org/1999/xhtml"}.merge(@output.includes[:html_tag] || {}), true
   %head
@@ -43,21 +46,20 @@
     != render_output(@page,@output) do
       = yield
 
-    - unless @partial_page || @output.partial
-      - if @google_analytics && @google_analytics[:enabled] == 'enabled'
-        :javascript
-          var _gaq = _gaq || [];
-          _gaq.push(['_setAccount', ' @google_analytics[:code] ']);
-          _gaq.push(['_trackPageview']);
-    
-          (function() {
-            var ga = document.createElement('script');
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 
-                'http://www') + '.google-analytics.com/ga.js';
-            ga.setAttribute('async', 'true');
-            document.documentElement.firstChild.appendChild(ga);
-          })();
+    - if @google_analytics && @google_analytics[:enabled] == 'enabled'
+      :javascript
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', ' @google_analytics[:code] ']);
+        _gaq.push(['_trackPageview']);
+  
+        (function() {
+          var ga = document.createElement('script');
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 
+              'http://www') + '.google-analytics.com/ga.js';
+          ga.setAttribute('async', 'true');
+          document.documentElement.firstChild.appendChild(ga);
+        })();
+
     != @output.includes[:body_end]
 
-- unless @partial_page || @output.partial
   != '</html>'
