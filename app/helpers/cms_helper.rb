@@ -695,7 +695,7 @@ EOF
                    "<li class='#{first ? "first " :  ""}'><a href='javascript:void(0);' onclick='ActiveTable.page(#{number},\"#{name}\",\"#{refresh_url}\",\"#{update_element}\");')'>#{number}</a></li>"
                  end
                  
-               }.to_s
+               }.join
         if(pagination[:page] < pagination[:pages_count])
           output << "<li class='highlight'><a href='javascript:void(0);' onclick='ActiveTable.page(#{pagination[:page]+1},\"#{name}\",\"#{refresh_url}\",\"#{update_element}\");')'>#{next_link_text}</a></li>"
         end
