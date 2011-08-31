@@ -31,6 +31,9 @@ class HashModel
   include WebivaValidationExtension
   include ModelExtension::OptionsExtension
 
+  self.class.delegate :logger, :to => 'Rails'
+  delegate :logger, :to => 'Rails'
+
   def persisted?; false; end
 
   # Needs the model name for generating error messages from methods like validates_presence_of
