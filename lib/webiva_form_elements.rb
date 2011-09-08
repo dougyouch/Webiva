@@ -1066,7 +1066,7 @@ HTML
       preview = "<img src='#{file.thumbnail_url('standard/', :thumb)}' /> #{file.name}"
     end
 
-    clear_tag = content_tag :a, 'clear'.t, {:class => 'inline_file_clear', :href => 'javascript:void(0);', :onclick => "$('#{object_name}_#{field}').value = ''; $('#{object_name}_#{field}_preview_content').innerHTML = ''; $('#{object_name}_#{field}_preview').hide(); $('#{object_name}_#{field}_frame').show(); $('#{object_name}_#{field}_frame').src = $('#{object_name}_#{field}_frame').src;"}
+    clear_tag = content_tag :a, 'clear'.t, {:class => 'inline_file_clear', :href => 'javascript:void(0);', :onclick => "$j('##{object_name}_#{field}').attr('value',''); $j('##{object_name}_#{field}_preview_content').html(''); $j('##{object_name}_#{field}_preview').hide(); $j('##{object_name}_#{field}_frame').show(); $j('##{object_name}_#{field}_frame').attr('src', $j('##{object_name}_#{field}_frame').attr('src'));"}
     
     output = "#{hidden_field field}"
     output += "<span class='inline_file_preview' id='#{object_name}_#{field}_preview'"
