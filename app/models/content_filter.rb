@@ -98,9 +98,9 @@ Options:
   def self.full_html_filter(code,options={}) #:nodoc:
      # Need file filter to output __fs__ stuff
     if options[:folder_id] && folder = DomainFile.find_by_id(options[:folder_id])
-      code = html_replace_images(code,folder.file_path,options[:live_url])
+      code = html_replace_images(code,folder.file_path,options[:live_url],options[:full_url])
     else
-      code = html_replace_images(code,'',options[:live_url])
+      code = html_replace_images(code,'',options[:live_url],options[:full_url])
     end
     code
   end
@@ -113,9 +113,9 @@ Options:
   def self.markdown_filter(code,options={}) #:nodoc:
     # Need file filter to output __fs__ stuff
     if options[:folder_id] && folder = DomainFile.find_by_id(options[:folder_id])
-      code = markdown_replace_images(code,folder.file_path,options[:live_url])
+      code = markdown_replace_images(code,folder.file_path,options[:live_url],options[:full_url])
     else
-      code = markdown_replace_images(code,'',options[:live_url])
+      code = markdown_replace_images(code,'',options[:live_url],options[:full_url])
     end
     begin
       Maruku.new(code).to_html
@@ -128,9 +128,9 @@ Options:
   def self.textile_filter(code,options={}) #:nodoc:
     # Need file filter images/ links and images
     if options[:folder_id] && folder = DomainFile.find_by_id(options[:folder_id])
-      code = textile_replace_images(code,folder.file_path,options[:live_url])
+      code = textile_replace_images(code,folder.file_path,options[:live_url],options[:full_url])
     else
-      code = textile_replace_images(code,'',options[:live_url])
+      code = textile_replace_images(code,'',options[:live_url],options[:full_url])
     end
     begin
       RedCloth.new(code).to_html
@@ -161,7 +161,7 @@ Options:
     @@content_filter_sanitizer.auto_link(code,  :html => { :target => '_blank', :rel => 'nofollow' } )
   end
   
-  def self.markdown_replace_images(code,image_folder_path,live_url = false) #:nodoc:
+  def self.markdown_replace_images(code, image_folder_path, live_url=false, full_url=false) #:nodoc:
     cd =  code.gsub(/(\!?)\[([^\]]+)\]\(images\/([^"')]+)/) do |mtch|
       img = $1
       alt_text = $2
@@ -171,7 +171,7 @@ Options:
         url = full_url
       else
         df = DomainFile.find_by_file_path(image_folder_path + "/" + image_path,:conditions => {  :private => false })
-        url = df ? (live_url ? df.url(size) : df.editor_url(size)) :  "/images/site/missing_thumb.gif" 
+        url = df ? (live_url ? df.send(full_url ? :full_url : :url, size) : df.editor_url(size)) :  "/images/site/missing_thumb.gif" 
       end
       "#{img}[#{alt_text}](#{url} "
     end
@@ -194,7 +194,7 @@ Options:
 
   end
 
- def self.html_replace_images(code,image_folder_path,live_url = false) #:nodoc:
+ def self.html_replace_images(code, image_folder_path, live_url=false, full_url=false) #:nodoc:
 
     re = Regexp.new("(['\"])images\/([a-zA-Z0-9_\\-\\/. :]+?)\\1" ,Regexp::IGNORECASE | Regexp::MULTILINE)
     cd =  code.gsub(re) do |mtch|
@@ -204,7 +204,7 @@ Options:
         url,size = url.split(":")
       end
       df = DomainFile.find_by_file_path(image_folder_path + "/" + url)
-      url = df ?  (live_url ? df.url(size) : df.editor_url(size))  : "/images/site/missing_thumb.gif"
+      url = df ?  (live_url ? df.send(full_url ? :full_url : :url, size) : df.editor_url(size))  : "/images/site/missing_thumb.gif"
       "#{wrapper}#{url}#{wrapper}"
     end
 
@@ -212,7 +212,7 @@ Options:
   end
 
 
-  def self.textile_replace_images(code,image_folder_path,live_url = false) #:nodoc:
+  def self.textile_replace_images(code, image_folder_path, live_url=false, full_url=false) #:nodoc:
 
     re = Regexp.new("(\!|\:)images\/([a-zA-Z0-9_\\-\\/. :]+)" ,Regexp::IGNORECASE | Regexp::MULTILINE)
     cd =  code.gsub(re) do |mtch|
@@ -222,7 +222,7 @@ Options:
         url,size = url.split(":")
       end
       df = DomainFile.find_by_file_path(image_folder_path + "/" + url,:conditions => {  :private => false })
-      url = df ?  (live_url ? df.url(size) : df.editor_url(size)) : "/images/site/missing_thumb.gif"
+      url = df ?  (live_url ? df.send(full_url ? :full_url : :url, size) : df.editor_url(size)) : "/images/site/missing_thumb.gif"
       "#{prefix}#{url}"
     end
 
