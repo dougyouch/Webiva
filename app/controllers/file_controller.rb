@@ -314,7 +314,7 @@ class FileController < CmsController # :nodoc: all
      
      if parent_folder && parent_folder.folder?
      
-      name = 'New Folder'.t
+      name = params[:name] || 'New Folder'.t
       @hide_item = true
       
       gallery_folder = Configuration.options.gallery_folder.to_i == parent_folder.id
