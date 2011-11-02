@@ -1,6 +1,6 @@
 - fields.each do |field|
   - field_options = field.options.clone
-  - if %w(radio_buttons select grouped_radio_buttons check_boxes ordered_array).include?(field.field_type.to_s)
+  - if %w(radio_buttons select grouped_radio_buttons check_boxes ordered_array grouped_select).include?(field.field_type.to_s)
     - opts = field_options.delete(:options)
     - if opts.is_a?(Symbol)
       - if options.class.respond_to?(opts)
