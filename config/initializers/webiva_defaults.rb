@@ -31,6 +31,8 @@ BETA_CODE = Webiva::Application.config.webiva_defaults['enable_beta_code']
 GIT_REPOSITORY = Webiva::Application.config.webiva_defaults['git_repository']
 CMS_DEFAULT_TIME_ZONE = Webiva::Application.config.webiva_defaults['time_zone']
 
+Time.zone = CMS_DEFAULT_TIME_ZONE
+
 # Only use X_SEND_FILE if it's enabled and we're not in test mode
 USE_X_SEND_FILE = (Rails.env == 'test' || Rails.env == 'cucumber' || Rails.env == 'selenium') ? false : Webiva::Application.config.webiva_defaults['use_x_send_file']
 
