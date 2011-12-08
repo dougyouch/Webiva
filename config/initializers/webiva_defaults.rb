@@ -8,12 +8,11 @@ Webiva::Application.configure do
   config.webiva_defaults['default_datetime_format'] ||= "%m/%d/%Y %I:%M %p"
   config.webiva_defaults['default_date_format'] ||= "%m/%d/%Y"
   config.webiva_defaults['enable_beta_code'] ||= false
-  config.webiva_defaults['time_zone'] ||= 'America/New_York'
+  config.webiva_defaults['time_zone'] ||= 'Eastern Time (US & Canada)'
   config.webiva_defaults['editor_login'] ||= false
   config.webiva_defaults['use_x_send_file'] ||= false
   config.webiva_defaults['git_repository'] ||= 'git://github.com/cykod/'
   config.time_zone = config.webiva_defaults['time_zone']
-  ENV['TZ'] = config.time_zone
 end
 
 # TODO: Need to get rid of these constants

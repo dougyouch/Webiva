@@ -240,7 +240,6 @@ class ApplicationController < ActionController::Base
 
   def set_timezone
     Time.zone = myself.time_zone.blank? ? Configuration.time_zone : myself.time_zone
-    ENV['TZ'] = Time.zone
   end
 
 
