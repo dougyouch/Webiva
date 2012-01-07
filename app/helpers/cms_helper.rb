@@ -455,7 +455,7 @@ Usage:
                  "<li class='#{first ? "first " :  ""}'><a href='javascript:void(0);' onclick='#{callback.call(number)}'>#{number}</a></li>"
                end
                
-             }.to_s 
+             }.join
       if(pages[:page] < pages[:pages])
         output <<  "<li class='highlight'><a href='javascript:void(0);' onclick='#{callback.call(pages[:page]+1)}')'>&gt;</a></li>"
       end
