@@ -3,8 +3,18 @@
 /* Body Styles */
 body
   {
- color: #000;
- }
+  font: 1em Helvetica Neue, Helvetica, "Droid Sans", sans-serif;
+  min-height: 100%;
+  margin: 0;
+  background: url("/images/Background.gif");
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.05)), color-stop(20%, rgba(255, 255, 255, 0.9)), color-stop(80%, rgba(255, 255, 255, 0.5))), url("/images/Background.gif");
+  background: -moz-linear-gradient(rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.9) 20%, rgba(255, 255, 255, 0.5) 80%), url("/images/Background.gif");
+  background: linear-gradient(rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.9) 20%, rgba(255, 255, 255, 0.5) 80%), url("/images/Background.gif");
+  background-attachment: fixed;
+  color: #363636; 
+  
+  }
+
 
 
 /* Generic Ajax Styles */
