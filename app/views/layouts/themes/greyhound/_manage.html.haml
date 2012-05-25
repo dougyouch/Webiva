@@ -1,6 +1,6 @@
 #cms_container
   #cms_header_wrapper
-    %header#cms_header
+    #cms_header
       - if myself.id && myself.editor?
         #cms_header_tools
           #cms_header_tools_content
@@ -20,7 +20,7 @@
       #cms_logo
         %a{:href => "/website/dashboard#cms_page_title"}
           %img{:src => WEBIVA_LOGO_FILE || theme_src("framework/logo.png")}/
-      %nav#cms_menu
+      #cms_menu
         %ul
           = render_webiva_menu(@menu,@cms_page_info[:section])
   #cms_breadcrumbs

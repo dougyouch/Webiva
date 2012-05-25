@@ -1,3 +1,9 @@
+/* Remember PIE doesn't like relative lengths used with empty elements, like input or image. Use px in IE stylesheet for them. */
+.button_link, form input[type=submit], form input[type=button],
+button.button_link, .active_table_wrapper {
+  behavior: url(/themes/greyhound/PIE.htc); 
+  }
+
 
 /* Basic Resets */
 
@@ -38,14 +44,31 @@ html[xmlns] .clearfix {
 
 /* Design Styles */
 h1, h2, h3, h4, h1 a { font-family: 'Droid Sans', arial, serif; letter-spacing:-0.03em; }
-body { font-family:Arial; font-size:12px; } 
-h2 { font-size:18px; padding-bottom:10px; color:#7a5534; }
+body {
+	font: 1em Helvetica Neue, Helvetica, "Droid Sans", sans-serif;
+	min-height: 100%;
+	margin: 0;
+	background: #f4f4f4;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.05)), color-stop(20%, rgba(255, 255, 255, 0.9)), color-stop(80%, rgba(255, 255, 255, 0.5))), url("../images/Background.gif");
+	background: -moz-linear-gradient(rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.9) 20%, rgba(255, 255, 255, 0.5) 80%), url("../images/Background.gif");
+	background: linear-gradient(rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.9) 20%, rgba(255, 255, 255, 0.5) 80%), url("../images/Background.gif");
+	background-attachment: fixed;
+	color: #363636; 
+	}
+
+h2 { /*font-size:18px;*/ }
 .inform {padding-top: 10px;}
-.header_value { color:#a87c4f; }
-
-a { color:#00bcdc; text-decoration:none; }
-a:hover { text-decoration:underline; }
-
+.header_value { color:#252525; }
+a {
+  -webkit-transition: color 0.2s ease-in;
+  -moz-transition: color 0.2s ease-in;
+  transition: color 0.2s ease-in; }
+  a:link, a:visited {
+    color: #1a7c9c;
+    text-shadow: 0 0.063em 0 white;
+    text-decoration: none; }
+  a:hover {
+    color: #2ac3f6; }
 .small { font-size:.7em; }
 .large { font-size: 1.4em; }
 
@@ -58,13 +81,11 @@ p.info {
   width: 550px;
   font-size: 12px;
   padding-bottom: 15px;
-  color: #754C28;
 }
 
 p.header {
   padding: 5px 5px;
-  border-bottom: 4px solid #754C28;
-  color: #754C28;
+
 }
 
 /* Auto Complete Stuff */
@@ -116,22 +137,30 @@ p.header {
 .ajax_tabs {
 	width:100%;
 	position:relative;
+	top:  20px;
+	margin-bottom: 1em;
+	color: #000;
+
 }
+
     .ajax_tabs > tbody > tr > td > a { 
+    	border: 1px solid #83a625;
+    	border-bottom: none;
        display:inline-block;
-       color:#cce5e9; 
+     color:#729120;
        font-weight:bold;
        font-size:14px;
        text-decoration:none; 
-       background-color:#8a5d3b;
+       background-color:#fdfdf2;
        padding:5px 15px;
      -moz-border-radius-topleft: 7px;
      -moz-border-radius-topright: 6px;
      -webkit-border-radius-topleft: 6px;
      -webkit-border-radius-topright: 6px;
      font-family: 'Droid Sans', arial, serif; 
-     }
-    .ajax_tabs > tbody > tr > td.selected > a { color:#603b17; background-color:white; }
+          }
+
+    .ajax_tabs > tbody > tr > td.selected > a { color:#729120; background-color:white;margin-bottom: -2px; }
 
     .ajax_tabs > tbody > tr > td { padding:0px 10px 0 0; background:inherit;  white-space: nowrap; }
     .ajax_tabs > tbody > tr > td.extra {
@@ -139,7 +168,7 @@ p.header {
      }
 
     .ajax_tabs > tbody > tr > td.content {
-      border:0px;
+			border: 1px solid #83a625;
       padding:10px;
       white-space: normal;
       background-color:white;
@@ -163,17 +192,28 @@ p.header {
 
 .button_link, form input[type=submit], form input[type=button],
 button.button_link { 
-  text-transform:downcase;
-  font-size:12px;
-  font-weight:normal;
-  color:white; padding:6px 6px; 
-  background-color: #00bcdc; 
-  -moz-border-radius: 8px;
-  -webkit-border-radius: 8px;
-  text-decoration:none; 
-  border:0px;
-  display:inline-block;
-  cursor:pointer;
+   color: #FFF!important;
+   font-size: 12px;
+  background: #16c2f9;
+  border: 1px solid #16c2f9;
+  padding: 8px;
+  -webkit-box-shadow: 0 1px rgba(255, 255, 255, 0.65) inset, 0 -1px 1px 0 rgba(0, 0, 0, 0.15) inset;
+  -moz-box-shadow: 0 1px rgba(255, 255, 255, 0.65) inset, 0 -1px 1px 0 rgba(0, 0, 0, 0.15) inset;
+  -ms-box-shadow: 0 1px rgba(255, 255, 255, 0.65) inset, 0 -1px 1px 0 rgba(0, 0, 0, 0.15) inset;
+  box-shadow: 0 1px rgba(255, 255, 255, 0.65) inset, 0 -1px 1px 0 rgba(0, 0, 0, 0.15) inset;
+  -webkit-border-radius:10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius:  10px;
+  border-radius:  10px;
+  -webkit-transition: color 0.2s ease-out, background 0.2s ease-in;
+  -moz-transition: color 0.2s ease-out, background 0.2s ease-in;
+  transition: color 0.2s ease-out, background 0.2s ease-in; 
+  display: inline-block;
+}
+.button_link:hover, form input[type=submit]:hover, form input[type=button]:hover,
+button.button_link:hover {
+  background: rgba(14, 154, 199, .9);
+  color: #fff; 
 }
 
 .button_link_alternative { 
@@ -188,8 +228,11 @@ button.button_link {
 
 /* Form */
 
-#RB_window .admin_form { background-color:white;   -moz-border-radius: 25px;
+#RB_window .admin_form { 
+	background-color:white;   
+	-moz-border-radius: 25px;
   -webkit-border-radius: 25px;
+  border-radius: 25px;
  }
 
 form {
@@ -208,20 +251,35 @@ form td.label {
  padding-top:10px;
  text-align:right;
  font-weight:bold;
- color:#3b648c;
+
  padding-right:15px;
 
 }
 
 form td.data {
  padding-top:10px;
-
+  width: 65%;
 }
-
+form .text_field_input, form .password_field_input, form .datetime_field_input {
+	width: 98%;
+	padding: 5px;
+	font-size: 13px;
+}
+form .datetime_field_input { padding: 3px;font-size: 12px;}
+h2 .text_field_input {
+	width: 40%;
+	margin-left: 5px;
+	padding: 5px 2px;
+}
+.block_right h2 img { display: none; /*hiding the magnifying glass */
+}
+form td select {
+	font-size: 16px;
+}
 form td.description, form td.description_vertical {
   padding-bottom:2px;
-  color:#999999;
-  font-size:10px;
+  color:#777;
+  font-size:11px;
 
 }
 
@@ -251,9 +309,11 @@ form td.header_description {
 
 
 form td.label_vertical {
+	width: 30%;
  color:#3b648c;
  font-weight:bold;
  padding-right:15px;
+
 }
 
 
@@ -272,6 +332,7 @@ form input:focus, form textarea:focus  {
  background-color: #e6f3ff;
 }
 
+
 /*form input[type=submit], form input[type=button] {
  border:1px solid #7098b3;
  color:#3b648c;
@@ -284,17 +345,17 @@ form input:focus, form textarea:focus  {
 /* Flash Notice */
 
 .flash_notice {
-  margin:5px 40px;
-  border:1px solid #CCCCCC;
-  background-color: #a6cdda;
-  color: #0f75bc;
+  margin:5px 40px 25px;
+  border:1px solid #9ebcd8;
+  background-color: #e2ebf3;
+  color: #000;
   font-weight:bold;
   padding:10px;
   text-align:center;
 }
 
 .flash_notice a {
-  color: #0f75bc;
+
 }
 
 
@@ -304,7 +365,9 @@ form input:focus, form textarea:focus  {
 .active_table_wrapper {
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
-  background-color:#cce5e9; 
+  border-radius: 8px;
+  background-color:#e7eadc; 
+
   padding:0px 8px 8px 8px;
   display:inline-block;
 }
@@ -318,10 +381,8 @@ form input:focus, form textarea:focus  {
 
 }
 .active_table th {
-
-    color:#603813;
     font-weight:bold;
-    background-color:#cce5e9;
+    background-color:#e7eadc;
     border-left:1px solid #FFFFFF;
     padding:10px 10px;
 
@@ -333,22 +394,20 @@ form input:focus, form textarea:focus  {
 
 
 .active_table th a {
-
-    color:#603813;
-    text-decoration:underline;
+   text-decoration:underline;
 }
 
 
 .active_table td {
-  padding:6px 5px;
-  color:#603813;
+  padding:10px 5px;
+ 
   background-color:white;
 }
 
 
 .active_table a {
   text-decoration:underline;
-  color:#183f66;
+
 }
 
 .active_table tbody td {
@@ -360,7 +419,7 @@ form input:focus, form textarea:focus  {
  display:block;
  padding: 4px 15px;
  text-align:center;
- background-color: #edc472;
+ background-color: #dce8ee;
 }
 
 
@@ -369,17 +428,17 @@ form input:focus, form textarea:focus  {
 }
 
 .active_table tr.highlighted_row td {
-  background-color:#d2e6ec;
+  background-color:#f8faf2;
 }
 
 .active_table tr.selected_row td {
-  background-color:#ffec91;
+  background-color:#fcfbe6;
 }
 
 
 
 table td .highlighted_col {
-  background-color:#d2e6ec;
+  background-color:#fcfbe6;
 }
 
 .highlighted_text {
@@ -412,7 +471,7 @@ table td .highlighted_col {
  ul.pagination li {
     display:block;
     float:left;
-    background-color:#a6cdda;
+    background-color:#e7eadc;
     margin:0px 2px;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -506,7 +565,6 @@ table td .highlighted_col {
  }
 
 .stat_viewer td {
-  color:#603b17;
   padding:5px 2px;
 }
 
@@ -567,8 +625,9 @@ table td .highlighted_col {
 
 #overDiv .cms_popup_caption {
   color:#3b648c;
-    background-color:#a6cdda;
+    background-color:#bcd9e3;
   font-weight:bold;
+  font-size: 12px;
 }
 
 
@@ -585,7 +644,7 @@ table td .highlighted_col {
 }
 
 .data_table th {
- background-color:#cce5e9;
+ background-color:#bcd9e3;
  font-weight:bold;
  padding: 1px 10px;
  border-right:1px solid white;
@@ -610,7 +669,7 @@ table td .highlighted_col {
 }
 
 .stat_table th {
-  color:#603813;
+
   font-weight:bold;
   background-color:#f2f7e3;
   padding:3px 10px;
@@ -623,7 +682,7 @@ table td .highlighted_col {
 
 .stat_table td {
   padding:3px 5px;
-  color:#603813;
+
   background-color:white;
 }
 
