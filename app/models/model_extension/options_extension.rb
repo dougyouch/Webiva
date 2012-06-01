@@ -68,7 +68,10 @@ module ModelExtension::OptionsExtension
       class << self; self end.send(:define_method,"#{field.to_s}_original_options") do
           options_select.clone
       end
-      
+      class << self; self end.send(:define_method,"#{field.to_s}_values") do
+          options_select.map(&:second)
+      end
+
       define_method "#{field.to_s}_display" do
         options[self.send(field)].t if options[self.send(field)]
       end
