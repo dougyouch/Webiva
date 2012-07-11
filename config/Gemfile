@@ -27,10 +27,9 @@ gem 'image_size'
 # Workling gems
 gem 'eventmachine'
 gem 'starling'
-
-# do not erase the following line
-# [MODULE GEMFILES]
-
+gem 'geoip'
+gem 'net-dns', :require => 'net/dns/resolver'
+gem 'delayed_job', "~> 2.1.4" # 3.0.0 doesn't work
 
 group :test, :spec, :cucumber, :selenium do
   gem 'rspec-rails'
@@ -47,9 +46,10 @@ group :test, :spec, :cucumber, :selenium do
 end
 
 group :development, :test do
-  gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git', :require => 'rails_development_boost'
+#  gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git', :require => 'rails_development_boost'
 end
 
 group :selenium do
 #  gem 'selenium-client',   '1.2.18'
 end
+
